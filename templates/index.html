@@ -10,6 +10,7 @@
     <h1>🍅 Pomodoro Timer</h1>
     <p>Work smarter with 25-minute focused sessions.</p>
 
+    <!-- Timer Display & Controls -->
     <div>
         <h2 id="timer">25:00</h2>
 
@@ -18,16 +19,25 @@
         <button onclick="resetTimer()">🔁 Reset</button>
     </div>
 
+    <!-- Completed Sessions Info -->
     <div class="completed-info">
         ✅ You have completed <strong>{{ completed }}</strong> Pomodoro session(s) today!
     </div>
 
-    <!-- 🔔 Sound Alert -->
+    <!-- View History Link -->
+    <p style="margin-top: 20px;">
+        <a href="/history" style="text-decoration: none; color: #d64545; font-weight: bold;">
+            🔍 View History
+        </a>
+    </p>
+
+    <!-- Sound Alert -->
     <audio id="alarmSound">
         <source src="/static/sound/ding.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
+    <!-- Timer Script -->
     <script>
         let timer;
         let totalTime = 25 * 60;
@@ -52,7 +62,7 @@
                     clearInterval(timer);
                     document.getElementById("alarmSound").play();
                     alert("⏰ Time's up! Take a break.");
-                    window.location.href = "/complete";
+                    window.location.href = "/complete";  // record to DB
                 }
             }, 1000);
         }
@@ -71,5 +81,6 @@
 
         updateDisplay();
     </script>
+
 </body>
 </html>
