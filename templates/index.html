@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-     <h1>🍅 Pomodoro Timer</h1>
+    <h1>🍅 Pomodoro Timer</h1>
     <p>Work smarter with 25-minute focused sessions.</p>
 
     <!-- ⏱️ Timer Display & Buttons -->
@@ -16,6 +16,12 @@
         <button onclick="pauseTimer()">⏸️ Pause</button>
         <button onclick="resetTimer()">🔁 Reset</button>
     </div>
+
+    <!-- 🔔 Sound Alert Audio -->
+    <audio id="alarmSound">
+        <source src="/static/sounds/ding.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <!-- 🧠 Timer Script -->
     <script>
@@ -40,6 +46,7 @@
                     updateDisplay();
                 } else {
                     clearInterval(timer);
+                    document.getElementById("alarmSound").play();  // 🔔 Sound bajao
                     alert("⏰ Time's up! Take a break.");
                 }
             }, 1000);
@@ -57,7 +64,7 @@
             updateDisplay();
         }
 
-        // Page load pe timer set
+        // Page load pe timer dikhana
         updateDisplay();
     </script>
 </body>
