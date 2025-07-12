@@ -6,27 +6,31 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+
     <h1>🍅 Pomodoro Timer</h1>
     <p>Work smarter with 25-minute focused sessions.</p>
 
-    <!-- ⏱️ Timer Display & Buttons -->
-    <div style="text-align:center; margin-top: 30px;">
+    <div>
         <h2 id="timer">25:00</h2>
+
         <button onclick="startTimer()">▶️ Start</button>
         <button onclick="pauseTimer()">⏸️ Pause</button>
         <button onclick="resetTimer()">🔁 Reset</button>
     </div>
 
-    <!-- 🔔 Sound Alert Audio -->
+    <div class="completed-info">
+        ✅ You have completed <strong>{{ completed }}</strong> Pomodoro session(s) today!
+    </div>
+
+    <!-- 🔔 Sound Alert -->
     <audio id="alarmSound">
         <source src="/static/sound/ding.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- 🧠 Timer Script -->
     <script>
         let timer;
-        let totalTime = 25 * 60; // 25 minutes
+        let totalTime = 25 * 60;
         let remainingTime = totalTime;
         let isRunning = false;
 
@@ -46,8 +50,9 @@
                     updateDisplay();
                 } else {
                     clearInterval(timer);
-                    document.getElementById("alarmSound").play();  // 🔔 Sound bajao
+                    document.getElementById("alarmSound").play();
                     alert("⏰ Time's up! Take a break.");
+                    window.location.href = "/complete";
                 }
             }, 1000);
         }
@@ -64,7 +69,6 @@
             updateDisplay();
         }
 
-        // Page load pe timer dikhana
         updateDisplay();
     </script>
 </body>
