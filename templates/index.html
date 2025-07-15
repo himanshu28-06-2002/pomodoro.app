@@ -2,13 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pomodoro Timer</title>
+    <title>Pomodoro Timer - Test Mode</title> <!-- ⬅️ Title Changed -->
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            background-color: #f9f9f9; /* ⬅️ Light background for test */
+            font-family: Arial, sans-serif;
+        }
+        .testing-banner {
+            background: #ffcc00;
+            color: #000;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
+    <!-- ⬅️ Testing Banner -->
+    <div class="testing-banner">🔧 TESTING MODE ACTIVE 🔧</div>
+
     <h1>🍅 Pomodoro Timer</h1>
-    <p>Work hiiiiiiiiiii smarter with 25-minute focused sessions.</p>
+    <p>Work smarter with 25-minute focused sessions.</p>
 
     <!-- Timer Display & Controls -->
     <div>
@@ -17,6 +33,9 @@
         <button onclick="startTimer()">▶️ Start</button>
         <button onclick="pauseTimer()">⏸️ Pause</button>
         <button onclick="resetTimer()">🔁 Reset</button>
+
+        <!-- ⬅️ New Test Button -->
+        <button onclick="fastForward()">⏩ Skip to End</button>
     </div>
 
     <!-- Completed Sessions Info -->
@@ -76,6 +95,12 @@
             clearInterval(timer);
             isRunning = false;
             remainingTime = totalTime;
+            updateDisplay();
+        }
+
+        // ⬅️ Test Feature: Skip to End
+        function fastForward() {
+            remainingTime = 1;  // only 1 second left
             updateDisplay();
         }
 
