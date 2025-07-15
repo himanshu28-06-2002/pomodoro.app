@@ -3,16 +3,18 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = "secret"
+app.secret_key = "secret"  # You can use a more secure key in production
+
+# Configure SQLite Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pomodoro.db'
 db = SQLAlchemy(app)
 
-# Session history model
+# Pomodoro session model
 class PomodoroSession(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     completed_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-# Create DB tables (run once)
+# Create DB tables
 with app.app_context():
     db.create_all()
 
@@ -32,3 +34,7 @@ def complete_session():
 def history():
     sessions = PomodoroSession.query.order_by(PomodoroSession.completed_at.desc()).all()
     return render_template('history.html', sessions=sessions)
+
+# ✅ Run the app on all interfaces (important for Jenkins)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
